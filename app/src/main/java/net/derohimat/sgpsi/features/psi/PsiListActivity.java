@@ -16,7 +16,9 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import net.derohimat.baseapp.ui.view.BaseRecyclerView;
 import net.derohimat.sgpsi.R;
 import net.derohimat.sgpsi.data.idlingresources.RecipesIdlingResource;
+import net.derohimat.sgpsi.data.models.ItemsDao;
 import net.derohimat.sgpsi.data.models.PsiDao;
+import net.derohimat.sgpsi.data.models.PsiReadingsType;
 import net.derohimat.sgpsi.features.AppBaseActivity;
 import net.derohimat.sgpsi.util.DialogFactory;
 
@@ -61,8 +63,9 @@ public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
     public void setUpSpiner() {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            public void onItemSelected(AdapterView<?> parent, View view, @PsiReadingsType int position, long id) {
+                mAdapter.setSelectedReading(position);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -76,16 +79,14 @@ public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
     public void setUpPresenter() {
         mPresenter = new PsiListPresenter(this);
         mPresenter.attachView(this);
-        mPresenter.getData();
+        mPresenter.getData(true);
     }
 
     @Override
     public void setUpAdapter() {
         mAdapter = new PsiListAdapter(mContext);
         mAdapter.setOnItemClickListener((view, position) -> {
-//            RecipeDao selectedItem = mAdapter.getDatas().get(position - 1);
-//
-//            startActivity(StepsDetailActivity.prepareIntent(getContext(), selectedItem.getId()));
+            ItemsDao itemsDao = mAdapter.getDatas().get(position - 1);
         });
     }
 
@@ -99,7 +100,7 @@ public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getData();
+                mPresenter.getData(false);
             }
 
             @Override
@@ -116,6 +117,7 @@ public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
 
     @Override
     protected void onDestroy() {
+        mPresenter.closeRealm();
         mPresenter.detachView();
         super.onDestroy();
     }

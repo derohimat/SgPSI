@@ -3,8 +3,8 @@ package net.derohimat.sgpsi.data.sources.remote;
 import android.content.Context;
 
 import net.derohimat.sgpsi.BuildConfig;
-import net.derohimat.sgpsi.data.models.PsiDao;
 import net.derohimat.sgpsi.constants.Constants;
+import net.derohimat.sgpsi.data.models.PsiDao;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,13 +16,12 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 import rx.Observable;
 
 public interface ApiService {
 
     @GET("psi")
-    Observable<PsiDao> getPsi(@Query("date_time") String date_time, @Query("date") String date);
+    Observable<PsiDao> getPsi();
 
     class Factory {
 

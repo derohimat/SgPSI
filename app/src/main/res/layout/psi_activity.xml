@@ -5,16 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinner"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:entries="@array/psi_readings_types"/>
+        android:padding="@dimen/spacing_normal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:entries="@array/psi_readings_types"/>
+    </android.support.v7.widget.CardView>
 
     <net.derohimat.baseapp.ui.view.BaseRecyclerView
         android:id="@+id/recipe_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacing_half"/>
+        android:padding="@dimen/spacing_normal"/>
 </LinearLayout>

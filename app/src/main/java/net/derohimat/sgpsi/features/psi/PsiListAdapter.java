@@ -11,10 +11,13 @@ import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
 import net.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
 import net.derohimat.sgpsi.R;
 import net.derohimat.sgpsi.data.models.ItemsDao;
+import net.derohimat.sgpsi.data.models.PsiReadingsType;
 
 import butterknife.Bind;
 
 class PsiListAdapter extends BaseRecyclerAdapter<ItemsDao, PsiListAdapter.BakingHolder> {
+
+    private @PsiReadingsType int mId = 0;
 
     PsiListAdapter(Context context) {
         super(context);
@@ -28,6 +31,10 @@ class PsiListAdapter extends BaseRecyclerAdapter<ItemsDao, PsiListAdapter.Baking
     @Override
     public BakingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new BakingHolder(mContext, getView(parent, viewType), mItemClickListener, mLongItemClickListener);
+    }
+
+    public void setSelectedReading(@PsiReadingsType int id) {
+        this.mId = id;
     }
 
     class BakingHolder extends BaseItemViewHolder<ItemsDao> {
@@ -44,7 +51,7 @@ class PsiListAdapter extends BaseRecyclerAdapter<ItemsDao, PsiListAdapter.Baking
 
         @Override
         public void bind(ItemsDao item) {
-            String reading = new Gson().toJson(item.getReadings());
+            String reading = new Gson().toJson(PsiListPresenter.filterReading(mId, item));
             mTxtTitle.setText(reading);
             mTxtTimestamp.setText("Created : " + item.getTimestamp());
             mTxtUpdateTimestamp.setText("Last Update : " + item.getUpdateTimestamp());

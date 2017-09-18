@@ -2,35 +2,25 @@ package net.derohimat.sgpsi.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class PsiDao {
+public class PsiDao extends RealmObject {
 
+    @PrimaryKey private long id;
     @SerializedName("api_info") private ApiInfoDao apiInfo;
-    @SerializedName("region_metadata") private List<RegionMetadataDao> regionMetadata;
-    @SerializedName("items") private List<ItemsDao> items;
+    @SerializedName("items") private RealmList<ItemsDao> items;
+
+    public long getId() {
+        return id;
+    }
 
     public ApiInfoDao getApiInfo() {
         return apiInfo;
     }
 
-    public void setApiInfo(ApiInfoDao apiInfo) {
-        this.apiInfo = apiInfo;
-    }
-
-    public List<RegionMetadataDao> getRegionMetadata() {
-        return regionMetadata;
-    }
-
-    public void setRegionMetadata(List<RegionMetadataDao> regionMetadata) {
-        this.regionMetadata = regionMetadata;
-    }
-
-    public List<ItemsDao> getItems() {
+    public RealmList<ItemsDao> getItems() {
         return items;
-    }
-
-    public void setItems(List<ItemsDao> items) {
-        this.items = items;
     }
 }
