@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="psi_readings_types">
+        <item>O3 SubIndex</item>
+        <item>PM10 24 Hourly</item>
+        <item>PM10 SubIndex</item>
+        <item>CO SubIndex</item>
+        <item>PM25 24 Hourly</item>
+        <item>CO 8 Hour Max</item>
+        <item>SO2 24 Hourly</item>
+        <item>PM25 SubIndex</item>
+        <item>PSI 24 Hourly</item>
+        <item>O3 8 Hour Max</item>
+    </string-array>
+</resources>

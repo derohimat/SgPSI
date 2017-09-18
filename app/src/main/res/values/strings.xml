@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Singapore PSI</string>
+
+    <string name="dialog_action_ok">OK</string>
+
+    <string name="dialog_general_error_message">General Error</string>
+    <string name="generic_error_title">Ops! An error occurred.</string>
+
+
+</resources>
