@@ -26,8 +26,8 @@ import butterknife.Bind;
 
 public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
 
-    @Bind(R.id.recipe_list_recyclerview) BaseRecyclerView mRecyclerView;
-    @Bind(R.id.spinner) Spinner spinner;
+    @Bind(R.id.psi_list_recyclerview) BaseRecyclerView mRecyclerView;
+    @Bind(R.id.psi_list_spinner) Spinner spinner;
 
     @Nullable
     private RecipesIdlingResource idlingResource;
@@ -117,7 +117,6 @@ public class PsiListActivity extends AppBaseActivity implements PsiListMvpView {
 
     @Override
     protected void onDestroy() {
-        mPresenter.closeRealm();
         mPresenter.detachView();
         super.onDestroy();
     }
