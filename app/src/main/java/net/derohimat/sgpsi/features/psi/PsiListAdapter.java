@@ -5,13 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import net.derohimat.baseapp.ui.adapter.BaseRecyclerAdapter;
 import net.derohimat.baseapp.ui.adapter.viewholder.BaseItemViewHolder;
 import net.derohimat.sgpsi.R;
 import net.derohimat.sgpsi.data.models.ItemsDao;
 import net.derohimat.sgpsi.data.models.PsiReadingsType;
+import net.derohimat.sgpsi.data.models.ReadingDao;
 
 import butterknife.Bind;
 
@@ -51,8 +50,16 @@ class PsiListAdapter extends BaseRecyclerAdapter<ItemsDao, PsiListAdapter.Baking
 
         @Override
         public void bind(ItemsDao item) {
-            String reading = new Gson().toJson(PsiListPresenter.filterReading(mId, item));
-            mTxtTitle.setText(reading);
+            ReadingDao reading = PsiListPresenter.filterReading(mId, item);
+            assert reading != null;
+            String stringBuilder = "National :" + reading.getNational() + "\n" +
+                    "Central :" + reading.getCentral() + "\n" +
+                    "North :" + reading.getNorth() + "\n" +
+                    "West : " + reading.getWest() + "\n" +
+                    "South : " + reading.getSouth() + "\n" +
+                    "East : " + reading.getEast();
+
+            mTxtTitle.setText(stringBuilder);
             mTxtTimestamp.setText("Created : " + item.getTimestamp());
             mTxtUpdateTimestamp.setText("Last Update : " + item.getUpdateTimestamp());
         }
